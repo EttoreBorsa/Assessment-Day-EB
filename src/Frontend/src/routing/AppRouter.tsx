@@ -1,4 +1,7 @@
+// React router
 import { Routes, Route } from "react-router-dom";
+
+// Pages
 import HomePage from "../pages/HomePage";
 import CustomerListPage from "../pages/CustomerListPage";
 import EmployeeListPage from "../pages/EmployeeListPage";
@@ -11,7 +14,6 @@ export default function AppRoutes() {
       <Route path="/SupplierList" element={<SupplierListPage />} />
       <Route path="/CustomerList" element={<CustomerListPage />} />
       <Route path="/EmployeeList" element={<EmployeeListPage />} />
-      
     </Routes>
   );
 }

@@ -1,16 +1,7 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-  styled,
-  tableCellClasses,
-} from "@mui/material";
 import { useEffect, useState } from "react";
+
+// Material
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, styled, tableCellClasses } from "@mui/material";
 
 interface SupplierListQuery {
   id: number;
