@@ -3,13 +3,8 @@ import { useEffect, useState } from "react";
 // Material
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, styled, tableCellClasses } from "@mui/material";
 
-interface SupplierListQuery {
-  id: number;
-  name: string;
-  address: string;
-  email: string;
-  phone: string;
-}
+// Types
+import type { SupplierListQuery } from "../types/supplier";
 
 export default function SupplierListPage() {
   const [list, setList] = useState<SupplierListQuery[]>([]);
