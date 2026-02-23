@@ -6,15 +6,17 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Container } from "@mui/material";
 
 // Routing
-import ShellHeader from "./routing/ShellHeader";
 import AppRoutes from "./routing/AppRouter";
+
+// Components
+import Header from "./components/layout/Header";
 
 function App() {
   return (
     <>
       <CssBaseline />
       <Router>
-        <ShellHeader />
+        <Header />
         <Container sx={{ pl: 1 }}>
           <AppRoutes />
         </Container>
