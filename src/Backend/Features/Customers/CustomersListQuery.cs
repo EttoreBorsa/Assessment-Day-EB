@@ -1,66 +1,62 @@
-namespace Backend.Features.Employees;
+namespace Backend.Features.Customers;
 
-public class EmployeesListQuery : IRequest<List<EmployeesListQueryResponse>>
+public class CustomersListQuery : IRequest<List<CustomersListQueryResponse>>
 {
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
+    public string? Name { get; set; }
+    public string? Email { get; set; }
 }
 
-public class EmployeesListQueryResponse
+public class CustomersListQueryResponse
 {
     public int Id { get; set; }
-    public string Code { get; internal set; } = "";
-    public string FirstName { get; set; } = "";
-    public string LastName { get; set; } = "";
+    public string Name { get; set; } = "";
     public string Address { get; set; } = "";
     public string Email { get; set; } = "";
     public string Phone { get; set; } = "";
-    public EmployeesListQueryResponseDepartment? Department { get; set; }
+    public string Iban { get; set; } = "";
+    public CustomersListQueryResponseCustomerCategory? CustomerCategory { get; set; }
 }
 
-public class EmployeesListQueryResponseDepartment
+public class CustomersListQueryResponseCustomerCategory
 {
     public string Code { get; set; } = "";
     public string Description { get; set; } = "";
 }
 
-
-internal class EmployeesListQueryHandler(BackendContext context) : IRequestHandler<EmployeesListQuery, List<EmployeesListQueryResponse>>
+internal class CustomersListQueryHandler(BackendContext context) : IRequestHandler<CustomersListQuery, List<CustomersListQueryResponse>>
 {
     private readonly BackendContext context = context;
 
-    public async Task<List<EmployeesListQueryResponse>> Handle(EmployeesListQuery request, CancellationToken cancellationToken)
+    public async Task<List<CustomersListQueryResponse>> Handle(CustomersListQuery request, CancellationToken cancellationToken)
     {
-        var query = context.Employees.AsQueryable();
-        if (!string.IsNullOrEmpty(request.FirstName))
-            query = query.Where(q => q.FirstName.ToLower().Contains(request.FirstName.ToLower()));
-        if (!string.IsNullOrEmpty(request.LastName))
-            query = query.Where(q => q.LastName.ToLower().Contains(request.LastName.ToLower()));
+        var query = context.Customers.AsQueryable();
+        if (!string.IsNullOrEmpty(request.Name))
+            query = query.Where(q => q.Name.ToLower().Contains(request.Name.ToLower()));
+        if (!string.IsNullOrEmpty(request.Email))
+            query = query.Where(q => q.Email.ToLower().Contains(request.Email.ToLower()));
 
-        var data = await query.OrderBy(q => q.LastName).ThenBy(q => q.FirstName).ToListAsync(cancellationToken);
-        var result = new List<EmployeesListQueryResponse>();
+        var data = await query.OrderBy(q => q.Email).ThenBy(q => q.Name).ToListAsync(cancellationToken);
+        var result = new List<CustomersListQueryResponse>();
 
         foreach (var item in data)
         {
-            var resultItem = new EmployeesListQueryResponse
+            var resultItem = new CustomersListQueryResponse
             {
                 Id = item.Id,
-                Code = item.Code,
-                FirstName = item.FirstName,
-                LastName = item.LastName,
+                Name = item.Name,
                 Address = item.Address,
                 Email = item.Email,
                 Phone = item.Phone,
+                Iban = item.Iban,
             };
 
-            var department = await context.Departments.SingleOrDefaultAsync(q => q.Id == item.DepartmentId, cancellationToken);
-            if (department is not null)
-                resultItem.Department = new EmployeesListQueryResponseDepartment
+            var customerCategory = await context.CustomerCategories.SingleOrDefaultAsync(q => q.Id == item.CustomerCategoryId, cancellationToken);
+            if (customerCategory is not null)
+                resultItem.CustomerCategory = new CustomersListQueryResponseCustomerCategory
                 {
-                    Code = department.Code,
-                    Description = department.Description
+                    Code = customerCategory.Code,
+                    Description = customerCategory.Description
                 };
-
 
             result.Add(resultItem);
         }
