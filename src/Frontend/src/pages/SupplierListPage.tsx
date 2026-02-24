@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Material
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 // Components
 import SupplierTable from "../components/tables/SupplierTable";
@@ -24,10 +24,13 @@ export default function SupplierListPage() {
 
   return (
     <>
-      {/* Title page */}
-      <Typography variant="h4" sx={{ textAlign: "center", mt: 4, mb: 4 }}>
-        Suppliers
-      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, mb: 3 }}>
+
+        {/* Title page */}
+        <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600" }} >
+          Suppliers
+        </Typography>
+      </Box>
 
       {/* Table */}
       <SupplierTable data={list} />

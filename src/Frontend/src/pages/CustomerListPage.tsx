@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Material
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 // Components
 import CustomerFilter from "../components/filters/CustomerFilter";
@@ -33,21 +33,28 @@ export default function CustomerListPage() {
 
   return (
     <>
-      {/* Title page */}
-      <Typography variant="h4" sx={{ textAlign: "center", mt: 4, mb: 4 }}>
-        Customers
-      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, mb: 3 }}>
 
-      {/* Filter */}
-      <CustomerFilter
-        name={name}
-        email={email}
-        onNameChange={setName}
-        onEmailChange={setEmail}
-      />
+        {/* Title page */}
+        <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600" }} >
+          Customers
+        </Typography>
 
-      {/* Button export */}
-      <CustomerButtonExport data={list} />
+        {/* Filter / Button */}
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2 }}>
+
+          {/* Filter */}
+          <CustomerFilter
+            name={name}
+            email={email}
+            onNameChange={setName}
+            onEmailChange={setEmail}
+          />
+
+          {/* Button export */}
+          <CustomerButtonExport data={list} />
+        </Box>
+      </Box>
 
       {/* Table */}
       <CustomerTable data={list} />
