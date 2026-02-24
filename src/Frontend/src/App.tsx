@@ -2,6 +2,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 
 // Material
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Container } from "@mui/material";
 
@@ -11,16 +12,21 @@ import AppRoutes from "./routing/AppRouter";
 // Components
 import Header from "./components/layout/Header";
 
+// Theme
+import theme from "./theme/theme"
+
 function App() {
   return (
     <>
-      <CssBaseline />
-      <Router>
-        <Header />
-        <Container sx={{ pl: 1 }}>
-          <AppRoutes />
-        </Container>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Header />
+          <Container sx={{ pl: 1 }}>
+            <AppRoutes />
+          </Container>
+        </Router>
+      </ThemeProvider>
     </>
   );
 }
