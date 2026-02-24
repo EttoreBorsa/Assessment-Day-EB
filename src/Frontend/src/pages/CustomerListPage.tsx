@@ -47,7 +47,7 @@ export default function CustomerListPage() {
       />
 
       {/* Button export */}
-      <CustomerButtonExport />
+      <CustomerButtonExport data={list} />
 
       {/* Table */}
       <CustomerTable data={list} />
