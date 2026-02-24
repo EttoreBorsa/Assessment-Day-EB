@@ -22,7 +22,11 @@ function App() {
         <CssBaseline />
         <Router>
           <Header />
-          <Container sx={{ pl: 1 }}>
+          <Container
+            disableGutters
+            maxWidth="xl"
+            sx={{ py: 4, px: 4 }}
+          >
             <AppRoutes />
           </Container>
         </Router>
