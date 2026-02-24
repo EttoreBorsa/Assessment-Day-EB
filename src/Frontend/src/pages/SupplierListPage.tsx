@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 
 // Components
 import SupplierTable from "../components/tables/SupplierTable";
+import SupplierButtonExport from "../components/buttons/SupplierButtonExport";
 
 // Types
 import type { SupplierListQuery } from "../types/supplier";
@@ -30,6 +31,9 @@ export default function SupplierListPage() {
         <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600" }} >
           Suppliers
         </Typography>
+
+        {/* Button export */}
+        <SupplierButtonExport data={list} />
       </Box>
 
       {/* Table */}
