@@ -58,7 +58,7 @@ export default function CustomerListPage() {
           />
 
           {/* Button export */}
-          <CustomerButtonExport data={list} />
+          <CustomerButtonExport data={list} disabled={loading || list.length === 0} />
         </Box>
       </Box>
       <Box sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column" }}>
