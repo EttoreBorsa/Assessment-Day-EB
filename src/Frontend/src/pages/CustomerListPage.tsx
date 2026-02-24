@@ -12,16 +12,23 @@ import type { CustomerListQuery } from "../types/customer";
 
 export default function CustomerListPage() {
   const [list, setList] = useState<CustomerListQuery[]>([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    fetch("/api/customers/list")
+    const query = new URLSearchParams(); // Crea un oggetto js per gestire i parametri nell'URL
+
+    if (name) query.append("Name", name); // Se non è vuoto lo aggiunge alla query
+    if (email) query.append("Email", email); // Se non è vuoto lo aggiunge alla query
+
+    fetch(`/api/customers/list?${query.toString()}`) // toString() converte l’oggetto in una stringa formattata per l’URL
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         setList(data as CustomerListQuery[]);
       });
-  }, []);
+  }, [name, email]);
 
   return (
     <>
@@ -31,7 +38,12 @@ export default function CustomerListPage() {
       </Typography>
 
       {/* Filter */}
-      <CustomerFilter />
+      <CustomerFilter
+        name={name}
+        email={email}
+        onNameChange={setName}
+        onEmailChange={setEmail}
+      />
 
       {/* Table */}
       <CustomerTable data={list} />
