@@ -1,38 +1,42 @@
 // React router
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Material
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+import { AppBar, Container, Toolbar, Box, Typography } from "@mui/material";
 import Button, { ButtonProps } from "@mui/material/Button";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 
 export default function Header() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+    <AppBar position="static">
+      <Container
+        disableGutters
+        maxWidth="xl"
+        sx={{ px: 4 }}
+      >
+        <Toolbar
+          disableGutters
+          sx={{ justifyContent: "space-between", alignItems: "center", gap: 2 }}
+        >
           <HomeButton />
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
             <HeaderButton to="/SupplierList">Suppliers</HeaderButton>
             <HeaderButton to="/CustomerList">Customers</HeaderButton>
-            <HeaderButton to="/EmployeeList">Employees</HeaderButton>
-            <HeaderLinkButton href="/swagger" variant="outlined">Swagger UI</HeaderLinkButton>
+            {/* <HeaderButton to="/EmployeeList">Employees</HeaderButton> */}
+            <HeaderLinkButton href="/swagger">Swagger UI</HeaderLinkButton>
           </Box>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar>
   );
 }
 
 function HomeButton() {
   return (
     <Typography
-      component={RouterLink}
+      component={NavLink}
       to="/"
       variant="h6"
-      sx={{ textDecoration: "none", color: "white" }}
+      sx={{ color: "#ffffff", textDecoration: "none" }}
     >
       Test Application
     </Typography>
@@ -44,14 +48,25 @@ interface HeaderButtonProps extends ButtonProps {
 }
 
 function HeaderButton(props: HeaderButtonProps) {
-  const { to, ...other } = props;
+  const { to, ...other } = props; // cosa fa?
 
   return (
     <Button
-      component={RouterLink}
+      component={NavLink}
       to={to}
+      disableRipple
       {...other}
-      sx={{ my: 2, color: "white", display: "block" }}
+      sx={{
+        display: "block",
+        p: 0,
+        color: "rgba(255, 255, 255, 0.8)",
+        "&:hover": {
+          color: "#ffffff",
+        },
+        "&.active": {
+          color: "#ffffff",
+        },
+      }}
     ></Button>
   );
 }
@@ -60,7 +75,14 @@ function HeaderLinkButton(props: ButtonProps) {
   return (
     <Button
       {...props}
-      sx={{ my: 2, color: "white", display: "block" }}
+      sx={{
+        display: "block",
+        p: 0,
+        color: "rgba(255, 255, 255, 0.8)",
+        "&:hover": {
+          color: "#ffffff",
+        },
+      }}
     ></Button>
   );
 }
