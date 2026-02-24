@@ -10,8 +10,11 @@ interface SupplierTableProps {
 
 export default function SupplierTable({ data }: SupplierTableProps) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="Supplier Table">
+    <TableContainer
+      component={Paper}
+      sx={{ overflowY: "auto" }}
+    >
+      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="Supplier Table">
         <TableHead>
           <TableRow>
             <StyledTableHeadCell>Name</StyledTableHeadCell>

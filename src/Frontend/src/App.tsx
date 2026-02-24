@@ -3,8 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 // Material
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Container } from "@mui/material";
+import { CssBaseline, Box, Container } from "@mui/material";
 
 // Routing
 import AppRoutes from "./routing/AppRouter";
@@ -21,14 +20,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <Header />
-          <Container
-            disableGutters
-            maxWidth="xl"
-            sx={{ py: 4, px: 4 }}
+          <Box sx={{ height: "100vh", minHeight: "500px", display: "flex", flexDirection: "column" }}
           >
-            <AppRoutes />
-          </Container>
+            <Header />
+            <Container
+              disableGutters
+              maxWidth="xl"
+              sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column", py: 4, px: 4 }}
+            >
+              <AppRoutes />
+            </Container>
+          </Box>
         </Router>
       </ThemeProvider>
     </>

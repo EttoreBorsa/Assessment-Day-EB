@@ -10,8 +10,11 @@ interface CustomerTableProps {
 
 export default function CustomerTable({ data }: CustomerTableProps) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="Customer Table">
+    <TableContainer
+      component={Paper}
+      sx={{ overflowY: "auto" }}
+    >
+      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="Customer Table">
         <TableHead>
           <TableRow>
             <StyledTableHeadCell>Name</StyledTableHeadCell>
