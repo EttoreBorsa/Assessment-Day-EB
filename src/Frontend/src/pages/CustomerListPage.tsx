@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Material
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 
 // Components
 import CustomerFilter from "../components/filters/CustomerFilter";
@@ -15,8 +15,11 @@ export default function CustomerListPage() {
   const [list, setList] = useState<CustomerListQuery[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     const query = new URLSearchParams(); // Crea un oggetto js per gestire i parametri nell'URL
 
     if (name) query.append("Name", name); // Se non è vuoto lo aggiunge alla query
@@ -28,6 +31,9 @@ export default function CustomerListPage() {
       })
       .then((data) => {
         setList(data as CustomerListQuery[]);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [name, email]);
 
@@ -55,9 +61,23 @@ export default function CustomerListPage() {
           <CustomerButtonExport data={list} />
         </Box>
       </Box>
+      <Box sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column" }}>
 
-      {/* Table */}
-      <CustomerTable data={list} />
+        {/* Loading / Empty / Table */}
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress sx={{ m: "5%" }} />
+          </Box>
+        ) : list.length === 0 ? (
+          <Box sx={{ my: "16px" }}>
+            <Typography variant="body1" color="text.secondary">
+              No results found.
+            </Typography>
+          </Box>
+        ) : (
+          <CustomerTable data={list} />
+        )}
+      </Box>
     </>
   );
 }
