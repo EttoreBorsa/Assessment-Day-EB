@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 
 // Components
+import CustomerFilter from "../components/filters/CustomerFilter";
 import CustomerTable from "../components/tables/CustomerTable";
 
 // Types
@@ -28,6 +29,9 @@ export default function CustomerListPage() {
       <Typography variant="h4" sx={{ textAlign: "center", mt: 4, mb: 4 }}>
         Customers
       </Typography>
+
+      {/* Filter */}
+      <CustomerFilter />
 
       {/* Table */}
       <CustomerTable data={list} />
