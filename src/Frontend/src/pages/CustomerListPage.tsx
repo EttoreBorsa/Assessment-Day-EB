@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 // Components
 import CustomerFilter from "../components/filters/CustomerFilter";
 import CustomerTable from "../components/tables/CustomerTable";
+import CustomerButtonExport from "../components/buttons/CustomerButtonExport";
 
 // Types
 import type { CustomerListQuery } from "../types/customer";
@@ -44,6 +45,9 @@ export default function CustomerListPage() {
         onNameChange={setName}
         onEmailChange={setEmail}
       />
+
+      {/* Button export */}
+      <CustomerButtonExport />
 
       {/* Table */}
       <CustomerTable data={list} />
