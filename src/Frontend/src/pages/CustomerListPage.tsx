@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Material
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Paper, Typography, CircularProgress } from "@mui/material";
 
 // Components
 import CustomerFilter from "../components/filters/CustomerFilter";
@@ -39,44 +39,42 @@ export default function CustomerListPage() {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, mb: 3 }}>
-
-        {/* Title page */}
+      <Box sx={{ mb: 3 }}>
         <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600" }} >
           Customers
         </Typography>
-
-        {/* Filter / Button */}
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2 }}>
-
-          {/* Filter */}
-          <CustomerFilter
-            name={name}
-            email={email}
-            onNameChange={setName}
-            onEmailChange={setEmail}
-          />
-
-          {/* Button export */}
-          <CustomerButtonExport data={list} disabled={loading || list.length === 0} />
-        </Box>
       </Box>
       <Box sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column", padding: "24px", overflowY: "auto" }}>
 
-        {/* Loading / Empty / Table */}
-        {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <CircularProgress sx={{ m: "5%" }} />
+          {/* Filter / Button */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, marginBottom: "24px" }}>
+
+            {/* Filter */}
+            <CustomerFilter
+              name={name}
+              email={email}
+              onNameChange={setName}
+              onEmailChange={setEmail}
+            />
+
+            {/* Button export */}
+            <CustomerButtonExport data={list} disabled={loading || list.length === 0} />
           </Box>
-        ) : list.length === 0 ? (
-          <Box sx={{ my: "16px" }}>
+
+          {/* Loading / Empty / Table */}
+          {loading ? (
+            <Box sx={{ height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <CircularProgress sx={{ m: "5%" }} />
+            </Box>
+          ) : list.length === 0 ? (
             <Typography variant="body1" color="text.secondary">
               No results found.
             </Typography>
-          </Box>
-        ) : (
-          <CustomerTable data={list} />
-        )}
+          ) : (
+            <CustomerTable data={list} />
+          )}
+        </Paper>
       </Box>
     </>
   );

@@ -12,7 +12,7 @@ export default function SupplierTable({ data }: SupplierTableProps) {
   return (
     <TableContainer
       component={Paper}
-      sx={{ overflowY: "auto" }}
+      sx={{ boxShadow: "none", border: "1px solid #ebf1f6", overflowY: "auto" }}
     >
       <Table stickyHeader sx={{ minWidth: 650 }} aria-label="Supplier Table">
         <TableHead>
