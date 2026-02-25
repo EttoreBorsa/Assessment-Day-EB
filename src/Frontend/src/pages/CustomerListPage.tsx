@@ -49,17 +49,16 @@ export default function CustomerListPage() {
 
           {/* Filter / Button */}
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, marginBottom: 3 }}>
-
-            {/* Filter */}
             <CustomerFilter
               name={name}
               email={email}
               onNameChange={setName}
               onEmailChange={setEmail}
             />
-
-            {/* Button export */}
-            <CustomerButtonExport data={list} disabled={loading || list.length === 0} />
+            <CustomerButtonExport
+              data={list}
+              disabled={loading || list.length === 0}
+            />
           </Box>
 
           {/* Loading / Empty / Table */}
@@ -68,11 +67,20 @@ export default function CustomerListPage() {
               <CircularProgress sx={{ m: "5%" }} />
             </Box>
           ) : list.length === 0 ? (
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="body1" color="text.secondary" fontSize="0.875rem">
               No results found.
             </Typography>
           ) : (
-            <CustomerTable data={list} />
+            <>
+              <CustomerTable data={list} />
+
+              {/* Count */}
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+                <Typography variant="body1" color="text.secondary" fontSize="0.875rem">
+                  Total: {list.length} {list.length === 1 ? "customer found" : "customers found"}
+                </Typography>
+              </Box>
+            </>
           )}
         </Paper>
       </Box>
