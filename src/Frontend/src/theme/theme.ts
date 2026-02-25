@@ -30,16 +30,29 @@ const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& .MuiSvgIcon-root": {
+            fontSize: "20px",
+          },
+          "& .MuiInputBase-input": {
+            color: theme.palette.text.secondary,
+          },
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#dee2e6",
+            transition: 'border-color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+          },
+        }),
+      },
+    },
     MuiTableCell: {
       styleOverrides: {
         root: {
-          borderBottomColor: '#ebf1f6',
+          borderBottomColor: "#ebf1f6",
         },
       },
     },
-    
-
-
   },
 });
 

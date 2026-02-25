@@ -1,5 +1,6 @@
 // Material
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, InputAdornment } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 interface SupplierFilterProps {
   name: string;
@@ -15,14 +16,13 @@ export default function SupplierFilter({ name, onNameChange }: SupplierFilterPro
         size="small"
         value={name}
         onChange={(e) => onNameChange(e.target.value)}
-        sx={{
-          "& .MuiOutlinedInput-notchedOutline": {
-            transition: "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1)",
-          },
-          "& .MuiOutlinedInput-root": {
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: "primary.main",
-            },
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchOutlinedIcon />
+              </InputAdornment>
+            ),
           },
         }}
       />
