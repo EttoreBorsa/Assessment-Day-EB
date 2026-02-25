@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Box, Paper, Typography, CircularProgress } from "@mui/material";
 
 // Components
+import SupplierFilter from "../components/filters/SupplierFilter";
 import SupplierTable from "../components/tables/SupplierTable";
 import SupplierButtonExport from "../components/buttons/SupplierButtonExport";
 
@@ -12,12 +13,17 @@ import type { SupplierListQuery } from "../types/supplier";
 
 export default function SupplierListPage() {
   const [list, setList] = useState<SupplierListQuery[]>([]);
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
 
-    fetch("/api/suppliers/list")
+    const query = new URLSearchParams(); // Crea un oggetto js per gestire i parametri nell'URL
+
+    if (name) query.append("Name", name); // Se non è vuoto lo aggiunge alla query
+
+    fetch(`/api/suppliers/list?${query.toString()}`) // toString() converte l’oggetto in una stringa formattata per l’URL
       .then((response) => {
         return response.json();
       })
@@ -27,7 +33,7 @@ export default function SupplierListPage() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [name]);
 
   return (
     <>
@@ -39,8 +45,14 @@ export default function SupplierListPage() {
       <Box sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column" }}>
         <Paper sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column", padding: "24px", overflowY: "auto" }}>
 
-          {/* Button */}
-          <Box sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "24px" }}>
+          {/* Filter / Button */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, marginBottom: "24px" }}>
+
+            {/* Filter */}
+            <SupplierFilter
+              name={name}
+              onNameChange={setName}
+            />
 
             {/* Button export */}
             <SupplierButtonExport data={list} disabled={loading || list.length === 0} />
