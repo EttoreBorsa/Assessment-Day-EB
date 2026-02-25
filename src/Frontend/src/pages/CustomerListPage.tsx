@@ -40,15 +40,15 @@ export default function CustomerListPage() {
   return (
     <>
       <Box sx={{ mb: 3 }}>
-        <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600" }} >
+        <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600" }}>
           Customers
         </Typography>
       </Box>
       <Box sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column" }}>
-        <Paper sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column", padding: "24px", overflowY: "auto" }}>
+        <Paper sx={{ flex: "1", minHeight: 0, display: "flex", flexDirection: "column", padding: 3, overflowY: "auto" }}>
 
           {/* Filter / Button */}
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, marginBottom: "24px" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, marginBottom: 3 }}>
 
             {/* Filter */}
             <CustomerFilter
